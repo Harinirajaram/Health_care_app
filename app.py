@@ -3,7 +3,6 @@ import joblib
 import pandas as pd
 import numpy as np
 
-
 app = Flask(__name__)
 
 # Load the models and scaler
@@ -22,24 +21,24 @@ def predict():
     # Get the input data from the request
     data = request.get_json(force=True)
     input_data_df = pd.DataFrame([
-	data['sex'], 
+	data['sex'],  # 1 for Male, 0 for Female
         data['age'],
 	data['smoking'],  # 1 for smoking, 0 for non-smoking
-	data['cigarettes_per_day'],
-	data['bpmeds'],
-	data['prevalent_stroke'],
-	data['prevalent_hyp'],
-	data['diabetes'],
-	data['cholesterol'],
+        data['cigarettes_per_day'],
+        data['bpmeds'],
+        data['prevalent_stroke'],
+        data['prevalent_hyp'],
+        data['diabetes'],
         data['systolic_blood_pressure'],
         data['diastolic_blood_pressure'],
+        data['cholesterol'],
         data['bmi'],
         data['heart_rate'],
-        data['glucose_level'] 
-    ])
+        data['glucose_level']
+    ])  # Convert to DataFrame for consistent processing
     
     # Scale the input data
-    input_data_scaled = scaler.transform(np.array(input_data_df).reshape(1,-1))
+    input_data_scaled = scaler.transform(np.array(input_data_df).reshape(1, -1))
     
     # Make predictions for each model
     log_pred_proba = log_model.predict_proba(input_data_scaled)[:, 1]
@@ -81,4 +80,5 @@ def predict():
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000,debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port,debug=True) 
