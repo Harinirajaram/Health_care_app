@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import joblib
 import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the models and scaler
 log_model = joblib.load('logistic_regression_model.pkl')  # Path to your saved Logistic Regression model
