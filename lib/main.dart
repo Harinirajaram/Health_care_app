@@ -52,7 +52,7 @@ class _CHDPredictorFormState extends State<CHDPredictorForm> {
       _result = ''; // Reset result
     });
 
-    final String apiUrl = 'https://health-care-app-4.onrender.com'; // Update with your API URL
+    final String apiUrl = 'https://health-care-app-4.onrender.com/predict'; // Update with your API URL
 
     // Validate and prepare data to send to the API
     final data = {
