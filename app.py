@@ -31,9 +31,9 @@ def predict():
         data['prevalent_stroke'],
         data['prevalent_hyp'],
         data['diabetes'],
+	data['cholesterol'],
         data['systolic_blood_pressure'],
         data['diastolic_blood_pressure'],
-        data['cholesterol'],
         data['bmi'],
         data['heart_rate'],
         data['glucose_level']
